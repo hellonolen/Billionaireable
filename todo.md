@@ -968,3 +968,14 @@
 - [x] Remove design routes from App.tsx
 - [x] Remove design imports from App.tsx
 - [x] Verify app works without design pages
+
+## Phase 23: Complete AI Companion Integration (URGENT)
+- [x] Make AI companion chat button visible and prominent on dashboard
+- [x] Add proactive insights card to homepage (shows AI-generated insights)
+- [ ] Test voice input functionality
+- [ ] Test web research integration
+- [ ] Set up email OAuth flow (Gmail) - infrastructure ready, OAuth pending
+- [ ] Set up calendar OAuth flow (Google Calendar) - infrastructure ready, OAuth pending
+- [ ] Test relationship monitoring
+- [ ] Test behavioral pattern detection
+- [ ] Verify all AI features work end-to-end

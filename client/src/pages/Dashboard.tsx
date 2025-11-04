@@ -18,6 +18,8 @@ import { SECTION_MAP } from "@/lib/sections";
 import { trpc } from "@/lib/trpc";
 import DetailView from "./DetailView";
 import { DashboardHeader } from "@/components/DashboardHeader";
+import { AICompanion } from "@/components/AICompanion";
+import { ProactiveInsights } from "@/components/ProactiveInsights";
 
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, rectSortingStrategy } from '@dnd-kit/sortable';
@@ -210,7 +212,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div style={{ background: COLORS.bg }} className="min-h-screen">
+    <>
+      <AICompanion />
+      <div style={{ background: COLORS.bg }} className="min-h-screen">
       <DashboardHeader 
         onQuickAdd={() => setShowQuickAdd(true)}
         onToggleTheme={toggleTheme}
@@ -219,6 +223,7 @@ export default function Dashboard() {
 
       {/* Scrollable dashboard with all 14 sections */}
       <section className="mx-auto max-w-7xl px-4 py-4">
+        <ProactiveInsights />
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={sections} strategy={rectSortingStrategy}>
             <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(12, minmax(0, 1fr))" }}>
@@ -382,5 +387,6 @@ export default function Dashboard() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
