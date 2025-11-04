@@ -1,0 +1,9 @@
+{
+  "query": "SHOW TABLES LIKE 'metrics_data'",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 21QwgYBsFYsrms6.1a37c9db3b61 --database SMDTBjD87an88y9nwbRwxg --execute SHOW TABLES LIKE 'metrics_data'",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 54
+}

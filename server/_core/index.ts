@@ -30,6 +30,15 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  
+  // Allow iframe embedding for Manus preview
+  app.use((req, res, next) => {
+    res.removeHeader('X-Frame-Options');
+    // Allow HTTPS origins for iframe embedding
+    res.setHeader('Content-Security-Policy', "frame-ancestors https:");
+    next();
+  });
+  
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));

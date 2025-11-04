@@ -1,5 +1,48 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762120230161,
+      "tag": "0000_breezy_mikhail_rasputin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1762120288444,
+      "tag": "0001_solid_gorilla_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1762121315046,
+      "tag": "0002_rapid_ultron",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1762125878248,
+      "tag": "0003_fast_nitro",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1762131368218,
+      "tag": "0004_boring_piledriver",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1762173974979,
+      "tag": "0005_demonic_gamma_corps",
+      "breakpoints": true
+    }
+  ]
 }

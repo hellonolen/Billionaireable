@@ -1,0 +1,8 @@
+{
+  "query": "DESCRIBE dashboard_sections",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 21QwgYBsFYsrms6.1a37c9db3b61 --database SMDTBjD87an88y9nwbRwxg --execute DESCRIBE dashboard_sections",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1146 (42S02) at line 1: Table 'smdtbjd87an88y9nwbrwxg.dashboard_sections' doesn't exist"
+  ]
+}
