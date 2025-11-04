@@ -276,8 +276,29 @@ export default function Admin() {
           </div>
         )}
 
+        {/* Content Tab */}
+        {activeTab === "content" && (
+          <div className="space-y-4">
+            <button
+              onClick={() => setLocation("/admin/ai-companion")}
+              className="w-full bg-white border rounded-xl p-6 text-left hover:shadow-md transition-shadow"
+              style={{ borderColor: COLORS.border }}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-semibold mb-1" style={{ color: COLORS.text }}>AI Companion Management</div>
+                  <div className="text-sm" style={{ color: COLORS.subt }}>
+                    Manage knowledge base, insights, and conversations
+                  </div>
+                </div>
+                <FileText className="h-6 w-6" style={{ color: COLORS.primary }} />
+              </div>
+            </button>
+          </div>
+        )}
+
         {/* Other tabs - placeholder for now */}
-        {["billing", "analytics", "content", "system"].includes(activeTab) && (
+        {["billing", "analytics", "system"].includes(activeTab) && (
           <div className="bg-white border rounded-xl p-12 text-center" style={{ borderColor: COLORS.border }}>
             <div className="text-lg font-semibold mb-2" style={{ color: COLORS.text }}>
               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Dashboard

@@ -5,6 +5,7 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscriptionsRouter } from "./routers/subscriptions";
 import { adminRouter } from "./routers/admin";
 import { teamsRouter } from "./routers/teams";
+import { aiCompanionRouter } from "./routers/ai-companion-router";
 import { getDashboardSection, getAllDashboardSections, upsertDashboardSection, getUserHealthBiomarkers, createHealthBiomarker, updateHealthBiomarker, getUserHealthGoals, createHealthGoal, updateHealthGoal, createSharedDashboard, getUserSharedDashboards, getSharedDashboard, getUserNotifications, createNotification, markNotificationRead, addMetricData, getMetricsByUser, getLatestMetric, getUserNotificationRules, createNotificationRule, updateNotificationRule, deleteNotificationRule, getUserIntegrations, getIntegration, upsertIntegration, getUserAchievements, unlockAchievement, getUserStreaks, updateStreak } from "./db";
 import { z } from "zod";
 
@@ -395,6 +396,7 @@ export const appRouter = router({
   subscriptions: subscriptionsRouter,
   admin: adminRouter,
   teams: teamsRouter,
+  aiCompanion: aiCompanionRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -363,6 +363,9 @@ export default function Dashboard() {
       <footer className="border-t" style={{ borderColor: COLORS.border }}>
         <div className="mx-auto max-w-7xl px-4 py-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="text-xs" style={{ color: COLORS.subt }}>
+              © {new Date().getFullYear()} Billionaireable LLC. All rights reserved.
+            </div>
             <div className="flex items-center gap-6">
               <a href="https://discord.gg/billionaireable" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:opacity-70 transition-opacity" style={{ color: COLORS.subt }}>
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -374,9 +377,6 @@ export default function Dashboard() {
               <a href="/terms" className="text-sm hover:opacity-70 transition-opacity" style={{ color: COLORS.subt }}>Terms</a>
               <a href="/disclosures" className="text-sm hover:opacity-70 transition-opacity" style={{ color: COLORS.subt }}>Disclosures</a>
               <a href="/preferences" className="text-sm hover:opacity-70 transition-opacity" style={{ color: COLORS.subt }}>Preferences</a>
-            </div>
-            <div className="text-xs" style={{ color: COLORS.subt }}>
-              © {new Date().getFullYear()} Billionaireable LLC
             </div>
           </div>
         </div>

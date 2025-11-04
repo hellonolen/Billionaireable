@@ -82,14 +82,16 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
             </button>
           </Link>
 
-          {/* Action icons - always visible */}
-          <button
-            onClick={onQuickAdd}
-            className="rounded-lg p-1.5 hover:bg-gray-50"
-            title="Quick Add"
-          >
-            <Plus className="h-4 w-4" style={{ color: COLORS.text }} />
-          </button>
+          {/* Action icons - Quick Add only on dashboard */}
+          {location === '/' && (
+            <button
+              onClick={onQuickAdd}
+              className="rounded-lg p-1.5 hover:bg-gray-50"
+              title="Quick Add"
+            >
+              <Plus className="h-4 w-4" style={{ color: COLORS.text }} />
+            </button>
+          )}
 
           
           {/* Profile Dropdown */}

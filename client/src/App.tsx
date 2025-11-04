@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { AICompanion } from "./components/AICompanion";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import Integrations from "./pages/Integrations";
@@ -21,6 +22,7 @@ import Billing from "./pages/Billing";
 import TeamManagement from "./pages/TeamManagement";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import AdminAICompanion from "./pages/AdminAICompanion";
 import AdminSettings from "./pages/AdminSettings";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -47,6 +49,7 @@ function Router() {
       <Route path={"/team"} component={TeamManagement} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/admin/ai-companion"} component={AdminAICompanion} />
       <Route path={"/admin/settings"} component={AdminSettings} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
@@ -65,6 +68,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <AICompanion />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
