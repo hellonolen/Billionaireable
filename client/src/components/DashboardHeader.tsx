@@ -14,7 +14,9 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
   const [location] = useLocation();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showDesignMenu, setShowDesignMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
+  const designMenuRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
 
   const isActive = (path: string) => location === path;
@@ -24,6 +26,9 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
     function handleClickOutside(event: MouseEvent) {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
         setShowProfileMenu(false);
+      }
+      if (designMenuRef.current && !designMenuRef.current.contains(event.target as Node)) {
+        setShowDesignMenu(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -81,6 +86,54 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
               <span className={`absolute bottom-0 left-0 w-full h-0.5 transition-all ${isActive('/share') ? 'bg-blue-500' : 'bg-blue-500 scale-x-0 group-hover:scale-x-100'}`} style={{ transformOrigin: 'left' }} />
             </button>
           </Link>
+
+          {/* Design Dropdown */}
+          <div className="relative hidden md:inline-block" ref={designMenuRef}>
+            <button
+              onClick={() => setShowDesignMenu(!showDesignMenu)}
+              className="relative px-2 py-1.5 text-xs font-medium flex items-center gap-1 group"
+              style={{ color: COLORS.text }}
+            >
+              Design
+              <ChevronDown className="h-3 w-3" />
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 transition-all ${(isActive('/design-1') || isActive('/design-2') || isActive('/design-3')) ? 'bg-blue-500' : 'bg-blue-500 scale-x-0 group-hover:scale-x-100'}`} style={{ transformOrigin: 'left' }} />
+            </button>
+            
+            {showDesignMenu && (
+              <div
+                className="absolute left-0 mt-2 w-48 rounded-lg border shadow-lg overflow-hidden z-50"
+                style={{ borderColor: COLORS.border, background: COLORS.bg }}
+              >
+                <Link href="/design-1">
+                  <button
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50"
+                    style={{ color: COLORS.text }}
+                    onClick={() => setShowDesignMenu(false)}
+                  >
+                    New Design 1
+                  </button>
+                </Link>
+                <Link href="/design-2">
+                  <button
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50"
+                    style={{ color: COLORS.text }}
+                    onClick={() => setShowDesignMenu(false)}
+                  >
+                    New Design 2
+                  </button>
+                </Link>
+                <Link href="/design-3">
+                  <button
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50"
+                    style={{ color: COLORS.text }}
+                    onClick={() => setShowDesignMenu(false)}
+                  >
+                    New Design 3
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
 
           {/* Action icons - Quick Add only on dashboard */}
           {location === '/' && (

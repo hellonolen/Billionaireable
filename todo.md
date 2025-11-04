@@ -952,3 +952,11 @@
 - [x] Database schema for emails, calendar, relationships, behavioral patterns
 - [x] Proactive monitoring service with relationship intelligence
 - [x] Manual logging options (for when OAuth isn't set up yet)
+
+## Phase 20: Design Concept Showcase
+- [x] Add "Design" menu item to header with dropdown
+- [x] Create Design 1 page - AI-First Modern Dashboard
+- [x] Create Design 2 page - Luxury Minimalist Dashboard  
+- [x] Create Design 3 page - Data-Rich Executive Dashboard
+- [x] Add routing for all 3 design pages
+- [x] Test navigation and links
