@@ -952,3 +952,12 @@
 - [x] Database schema for emails, calendar, relationships, behavioral patterns
 - [x] Proactive monitoring service with relationship intelligence
 - [x] Manual logging options (for when OAuth isn't set up yet)
+
+## Phase 21: Recreate Design Concept Pages (Lost in Rollback)
+- [x] Recreate Design 1 page - AI-First Modern Dashboard
+- [x] Recreate Design 2 page - Luxury Minimalist Dashboard
+- [x] Recreate Design 3 page - Data-Rich Executive Dashboard
+- [x] Add Design menu to header (ALWAYS VISIBLE, not hidden)
+- [x] Add routes to App.tsx
+- [x] Fix AI chatbot visibility (moved to bottom-right, larger, gradient background, white border)
+- [x] Test all 3 designs are accessible

@@ -28,6 +28,9 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclosures from "./pages/Disclosures";
 import Preferences from "./pages/Preferences";
+import Design1 from "./pages/Design1";
+import Design2 from "./pages/Design2";
+import Design3 from "./pages/Design3";
 
 function Router() {
   return (
@@ -55,6 +58,9 @@ function Router() {
       <Route path={"/terms"} component={Terms} />
       <Route path={"/disclosures"} component={Disclosures} />
       <Route path={"/preferences"} component={Preferences} />
+      <Route path={"/design-1"} component={Design1} />
+      <Route path={"/design-2"} component={Design2} />
+      <Route path={"/design-3"} component={Design3} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
