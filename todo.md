@@ -979,3 +979,22 @@
 - [ ] Test relationship monitoring
 - [ ] Test behavioral pattern detection
 - [ ] Verify all AI features work end-to-end
+
+## Phase 24: Fix AI Chat Interface (URGENT)
+- [x] Remove transparency from chat window (solid white/dark background)
+- [x] Change from floating window to slide-in panel or full modal
+- [x] Fix overlap with dashboard content
+- [x] Make chat window properly readable and usable
+- [ ] Test on actual dashboard to verify no overlap
+
+## Phase 25: Rebuild AI Agent (NO CHATBOT - Embedded Intelligence)
+- [x] Remove AI chatbot completely (no floating button, no chat window)
+- [x] Add always-listening voice icon in header (LEFT side, near logo)
+- [x] Create Transcripts page (/transcripts) to show conversation history
+- [x] Add Transcripts link to header navigation
+- [ ] Build embedded AI insights that appear DIRECTLY in dashboard sections
+- [ ] Add proactive alerts that show up in context (not in separate chat)
+- [ ] Integrate AI analysis into each dashboard card
+- [ ] Add contextual AI suggestions within each section
+- [ ] Make AI invisible but everywhere (analyzing, suggesting, alerting)
+- [ ] Test embedded intelligence in dashboard

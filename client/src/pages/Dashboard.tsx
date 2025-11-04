@@ -18,7 +18,6 @@ import { SECTION_MAP } from "@/lib/sections";
 import { trpc } from "@/lib/trpc";
 import DetailView from "./DetailView";
 import { DashboardHeader } from "@/components/DashboardHeader";
-import { AICompanion } from "@/components/AICompanion";
 import { ProactiveInsights } from "@/components/ProactiveInsights";
 
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
@@ -212,9 +211,7 @@ export default function Dashboard() {
   }
 
   return (
-    <>
-      <AICompanion />
-      <div style={{ background: COLORS.bg }} className="min-h-screen">
+    <div style={{ background: COLORS.bg }} className="min-h-screen">
       <DashboardHeader 
         onQuickAdd={() => setShowQuickAdd(true)}
         onToggleTheme={toggleTheme}
@@ -387,6 +384,5 @@ export default function Dashboard() {
         </div>
       </footer>
     </div>
-    </>
   );
 }

@@ -28,11 +28,13 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclosures from "./pages/Disclosures";
 import Preferences from "./pages/Preferences";
+import Transcripts from "./pages/Transcripts";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Dashboard} />
+      <Route path={"/transcripts"} component={Transcripts} />
       <Route path={"/settings"} component={Settings} />
       <Route path={"/integrations"} component={Integrations} />
 

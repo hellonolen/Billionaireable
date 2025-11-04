@@ -3,6 +3,7 @@ import { Bell, User, ChevronDown, CreditCard, Users, Link as LinkIcon, Download,
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { VoiceListener } from "@/components/VoiceListener";
 
 interface DashboardHeaderProps {
   onQuickAdd?: () => void;
@@ -39,6 +40,7 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
     <header className="border-b sticky top-0 z-10" style={{ borderColor: COLORS.border, background: COLORS.bg }}>
       <div className="mx-auto max-w-7xl px-2 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-3">
+          <VoiceListener />
           <Link href="/">
             <div className="leading-tight cursor-pointer hover:opacity-80 transition-opacity">
               <div className="text-lg font-semibold" style={{ color: COLORS.text }}>Billionaireable</div>
@@ -79,6 +81,12 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
             <button className="relative px-2 py-1.5 text-xs font-medium hidden md:inline-block group" style={{ color: COLORS.text }}>
               Share
               <span className={`absolute bottom-0 left-0 w-full h-0.5 transition-all ${isActive('/share') ? 'bg-blue-500' : 'bg-blue-500 scale-x-0 group-hover:scale-x-100'}`} style={{ transformOrigin: 'left' }} />
+            </button>
+          </Link>
+          <Link href="/transcripts">
+            <button className="relative px-2 py-1.5 text-xs font-medium hidden md:inline-block group" style={{ color: COLORS.text }}>
+              Transcripts
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 transition-all ${isActive('/transcripts') ? 'bg-blue-500' : 'bg-blue-500 scale-x-0 group-hover:scale-x-100'}`} style={{ transformOrigin: 'left' }} />
             </button>
           </Link>
           
