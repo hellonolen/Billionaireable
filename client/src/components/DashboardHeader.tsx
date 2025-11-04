@@ -14,7 +14,6 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
   const [location] = useLocation();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [showDesignMenu, setShowDesignMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
 
@@ -83,39 +82,6 @@ export function DashboardHeader({ onQuickAdd, onToggleTheme, onOpenCustomize }: 
             </button>
           </Link>
           
-          {/* Design Dropdown Menu */}
-          <div className="relative inline-block">
-            <button
-              onClick={() => setShowDesignMenu(!showDesignMenu)}
-              className="relative px-2 py-1.5 text-xs font-medium inline-flex items-center gap-1 group"
-              style={{ color: COLORS.text }}
-            >
-              Design
-              <ChevronDown className="h-3 w-3" />
-            </button>
-            {showDesignMenu && (
-              <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg border" style={{ background: COLORS.bg, borderColor: COLORS.border }}>
-                <Link href="/design-1">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" style={{ color: COLORS.text }}>
-                    New Design 1
-                  </button>
-                </Link>
-                <Link href="/design-2">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" style={{ color: COLORS.text }}>
-                    New Design 2
-                  </button>
-                </Link>
-                <Link href="/design-3">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" style={{ color: COLORS.text }}>
-                    New Design 3
-                  </button>
-                </Link>
-              </div>
-            )}
-          </div>
-          
-
-
           {/* Action icons - Quick Add only on dashboard */}
           {location === '/' && (
             <button
