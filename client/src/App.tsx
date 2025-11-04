@@ -28,9 +28,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclosures from "./pages/Disclosures";
 import Preferences from "./pages/Preferences";
-import Design1 from "./pages/Design1";
-import Design2 from "./pages/Design2";
-import Design3 from "./pages/Design3";
 
 function Router() {
   return (
@@ -51,9 +48,6 @@ function Router() {
       <Route path={"/billing"} component={Billing} />
       <Route path={"/team"} component={TeamManagement} />
       <Route path={"/profile"} component={Profile} />
-      <Route path={"/design-1"} component={Design1} />
-      <Route path={"/design-2"} component={Design2} />
-      <Route path={"/design-3"} component={Design3} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/admin/ai-companion"} component={AdminAICompanion} />
       <Route path={"/admin/settings"} component={AdminSettings} />
