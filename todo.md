@@ -1095,3 +1095,11 @@
 - [x] Add "Sign Up to Customize" CTA on demo dashboard
 - [ ] Test complete user journey: view demo → checkout → payment → unlock
 - [x] Deploy to billionaireable.com via Railway
+
+## Phase 31: Admin Authentication (URGENT - Meeting in 1 hour)
+- [x] Add "Sign In" button to header (visible when not logged in)
+- [x] Implement Manus OAuth login flow)
+- [x] Show user profile/logout when logged in
+- [x] Verify owner gets admin role automatically
+- [ ] Test login on billionaireable.com
+- [ ] Deploy to production
