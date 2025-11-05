@@ -27,10 +27,30 @@ export default function Markets() {
       
       <main className="mx-auto max-w-7xl px-4 py-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 gap-4">
           <div>
             <h1 className="text-3xl font-bold" style={{ color: COLORS.text }}>Markets</h1>
             <p className="text-sm mt-1" style={{ color: COLORS.subt }}>Real-time market data from Finviz • Updates every 60s</p>
+          </div>
+          <div className="flex-shrink-0">
+            <input
+              type="text"
+              placeholder="Search ticker (e.g., AAPL, TSLA)"
+              className="px-4 py-2 rounded-lg border text-sm w-64"
+              style={{
+                borderColor: COLORS.border,
+                background: COLORS.panel,
+                color: COLORS.text
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const ticker = (e.target as HTMLInputElement).value.trim().toUpperCase();
+                  if (ticker) {
+                    window.open(`https://finviz.com/quote.ashx?t=${ticker}`, '_blank');
+                  }
+                }
+              }}
+            />
           </div>
         </div>
 
