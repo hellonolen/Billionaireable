@@ -1115,3 +1115,9 @@
 - [ ] Ensure Sign In button redirects to Manus OAuth (not modal)
 - [ ] Test on dev server
 - [ ] Deploy fix to production
+
+## Phase 33: Fix All Detail Pages (URGENT - Meeting Soon)
+- [ ] Fix News & Market Intelligence page layout (currently pitiful)
+- [ ] Add data to all 15 detail pages
+- [ ] Ensure all detail pages match homepage quality
+- [ ] Deploy fixes to production
