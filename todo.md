@@ -1101,5 +1101,17 @@
 - [x] Implement Manus OAuth login flow)
 - [x] Show user profile/logout when logged in
 - [x] Verify owner gets admin role automatically
-- [ ] Test login on billionaireable.com
-- [ ] Deploy to production
+- [x] Test login on billionaireable.com
+- [x] Deploy to production
+
+## Phase 32: Fix Broken Login Modal (URGENT)
+- [ ] Remove old broken login modal from DashboardHeader
+- [ ] Ensure Sign In button redirects to Manus OAuth (not modal)
+- [ ] Test on dev server
+- [ ] Deploy fix to production
+
+## Phase 32: Fix Broken Login Modal (URGENT)
+- [ ] Remove old broken login modal from DashboardHeader
+- [ ] Ensure Sign In button redirects to Manus OAuth (not modal)
+- [ ] Test on dev server
+- [ ] Deploy fix to production
