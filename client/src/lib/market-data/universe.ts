@@ -5,7 +5,7 @@ export const CRYPTO = ['BTC-USD', 'ETH-USD', 'SOL-USD'];
 export const FOREX = ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD'];
 
 export const DEFAULT_BY_TAB: Record<string, string[]> = {
-  all: [...CRYPTO, ...STOCKS.slice(0, 5), ...INDEXES.slice(0, 3)],
+  all: [...STOCKS, ...INDEXES, ...CRYPTO, ...FOREX.slice(0, 3)],
   stocks: STOCKS,
   indexes: INDEXES,
   crypto: CRYPTO,

@@ -1128,6 +1128,6 @@
 - [x] Create data router with first-paint loading + polling + crypto WebSocket
 - [x] Build TickerCard and ScreenerGrid components
 - [x] Add tabs for All/Stocks/Indexes/Crypto/Forex/Futures
-- [ ] Ensure all tabs show data immediately on first load
-- [ ] Test live crypto WebSocket updates
-- [ ] Deploy to production
+- [x] Ensure all tabs show data immediately on first load
+- [x] Test live crypto WebSocket updates
+- [x] Deploy to production

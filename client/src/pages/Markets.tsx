@@ -41,9 +41,9 @@ export default function Markets() {
               onClick={() => setActiveTab(tab.value)}
               className="px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all"
               style={{
-                background: activeTab === tab.value ? COLORS.primary : COLORS.panel,
-                color: activeTab === tab.value ? 'white' : COLORS.text,
-                border: `1px solid ${activeTab === tab.value ? COLORS.primary : COLORS.border}`,
+                background: 'transparent',
+                color: activeTab === tab.value ? COLORS.primary : COLORS.text,
+                border: `2px solid ${activeTab === tab.value ? COLORS.primary : COLORS.border}`,
               }}
             >
               {tab.label}
