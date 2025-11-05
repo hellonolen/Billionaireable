@@ -2,88 +2,60 @@ import { Router } from "express";
 
 const router = Router();
 
-const BASE = 'https://api.exchangerate.host/latest';
+// Free API: https://www.exchangerate-api.com/docs/free
+const BASE_URL = 'https://open.er-api.com/v6/latest';
 
-function unique<T>(a: T[]): T[] {
-  return Array.from(new Set(a));
-}
-
-function pairsNeeded(list: string[]) {
-  const bases = unique(list.map(s => s.slice(0, 3)));
-  const quotes = unique(list.map(s => s.slice(3)));
-  return { bases, quotes };
-}
-
-async function getBase(base: string, symbols: string[]) {
-  const url = `${BASE}?base=${base}&symbols=${symbols.join(',')}`;
-  const r = await fetch(url, {
-    headers: { 'User-Agent': 'ManusFX/1.0' }
-  });
-  if (!r.ok) return { rates: {} as Record<string, number> };
-  return r.json();
+async function getRates(base: string) {
+  try {
+    const r = await fetch(`${BASE_URL}/${base}`);
+    if (!r.ok) return { rates: {} };
+    const data = await r.json();
+    return { rates: data.rates || {} };
+  } catch {
+    return { rates: {} };
+  }
 }
 
 router.post('/api/fx', async (req, res) => {
   try {
     const { pairs = [] } = req.body as { pairs: string[] };
-    const clean = pairs.filter(p => p?.length === 6);
+    const clean = pairs.filter(p => typeof p === 'string' && p.length === 6);
     if (!clean.length) return res.json({ quotes: [] });
 
-    const { bases, quotes } = pairsNeeded(clean);
-    const packs = await Promise.all(bases.map(b => getBase(b, quotes)));
-    const byBase: Record<string, Record<string, number>> = {};
-    bases.forEach((b, i) => { byBase[b] = packs[i]?.rates || {}; });
+    // Get unique base currencies
+    const bases = Array.from(new Set(clean.map(s => s.slice(0, 3))));
+    
+    // Fetch rates for each base
+    const ratesData = await Promise.all(bases.map(b => getRates(b)));
+    const ratesByBase: Record<string, Record<string, number>> = {};
+    bases.forEach((b, i) => {
+      ratesByBase[b] = ratesData[i].rates;
+    });
 
     const now = Date.now();
-    const quotesOut = clean.map(sym => {
-      const b = sym.slice(0, 3), q = sym.slice(3);
-      const rate = byBase[b]?.[q];
-      let price = typeof rate === 'number' ? rate : 0;
+    const quotes = clean.map(sym => {
+      const base = sym.slice(0, 3);
+      const quote = sym.slice(3);
+      const rate = ratesByBase[base]?.[quote];
+      
+      if (typeof rate !== 'number' || rate <= 0) return null;
+      
       return {
         symbol: sym,
-        name: `${b}/${q}`,
-        assetClass: 'forex',
-        price,
+        name: `${base}/${quote}`,
+        assetClass: 'forex' as const,
+        price: rate,
         change: 0,
         changePct: 0,
         time: now
       };
-    }).filter(x => x.price > 0);
+    }).filter(Boolean);
 
-    res.json({ quotes: quotesOut });
-  } catch {
+    res.json({ quotes });
+  } catch (err) {
+    console.error('[FX API] Error:', err);
     res.json({ quotes: [] });
   }
-});
-
-router.get('/api/fx', async (req, res) => {
-  const raw = ((req.query.pairs as string) || '').split(',').filter(Boolean);
-  const { pairs = raw } = { pairs: raw };
-  const clean = pairs.filter(p => p?.length === 6);
-  if (!clean.length) return res.json({ quotes: [] });
-
-  const { bases, quotes } = pairsNeeded(clean);
-  const packs = await Promise.all(bases.map(b => getBase(b, quotes)));
-  const byBase: Record<string, Record<string, number>> = {};
-  bases.forEach((b, i) => { byBase[b] = packs[i]?.rates || {}; });
-
-  const now = Date.now();
-  const quotesOut = clean.map(sym => {
-    const b = sym.slice(0, 3), q = sym.slice(3);
-    const rate = byBase[b]?.[q];
-    let price = typeof rate === 'number' ? rate : 0;
-    return {
-      symbol: sym,
-      name: `${b}/${q}`,
-      assetClass: 'forex',
-      price,
-      change: 0,
-      changePct: 0,
-      time: now
-    };
-  }).filter(x => x.price > 0);
-
-  res.json({ quotes: quotesOut });
 });
 
 export default router;
