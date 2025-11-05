@@ -48,7 +48,7 @@ export default function Markets() {
               {tab.label}
               {activeTab === tab.value && (
                 <div
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300"
                   style={{ background: COLORS.primary }}
                 />
               )}
