@@ -1,14 +1,14 @@
-import type { Quote } from "@/lib/market-data/types";
-import { ArrowUp, ArrowDown } from "lucide-react";
+import { Quote } from '@/lib/market-data/router';
+import { COLORS } from '@/lib/constants';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface TickerCardProps {
   quote: Quote;
 }
 
 export function TickerCard({ quote }: TickerCardProps) {
-  const isPositive = quote.changePercent >= 0;
-  const changeColor = isPositive ? "text-green-600" : "text-red-600";
-  const bgColor = isPositive ? "bg-green-50" : "bg-red-50";
+  const isPositive = quote.changePct >= 0;
+  const changeColor = isPositive ? '#16a34a' : '#dc2626';
 
   const formatPrice = (price: number) => {
     if (price >= 1000) return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -24,21 +24,21 @@ export function TickerCard({ quote }: TickerCardProps) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+    <div className="border rounded-lg p-4 hover:shadow-md transition-shadow" style={{ borderColor: COLORS.border, background: COLORS.panel }}>
       <div className="flex items-start justify-between mb-2">
         <div>
-          <div className="font-semibold text-gray-900">{quote.symbol}</div>
-          <div className="text-sm text-gray-500 truncate">{quote.name}</div>
+          <div className="font-semibold" style={{ color: COLORS.text }}>{quote.symbol}</div>
+          {quote.name && <div className="text-sm truncate" style={{ color: COLORS.subt }}>{quote.name}</div>}
         </div>
-        <span className="text-xs text-gray-400 uppercase">{quote.assetType}</span>
+        <span className="text-xs uppercase" style={{ color: COLORS.subt }}>{quote.assetClass}</span>
       </div>
 
       <div className="mt-3">
-        <div className="text-2xl font-bold text-gray-900">
+        <div className="text-2xl font-bold" style={{ color: COLORS.text }}>
           ${formatPrice(quote.price)}
         </div>
 
-        <div className={`flex items-center gap-1 mt-1 ${changeColor}`}>
+        <div className="flex items-center gap-1 mt-1" style={{ color: changeColor }}>
           {isPositive ? (
             <ArrowUp className="w-4 h-4" />
           ) : (
@@ -47,19 +47,19 @@ export function TickerCard({ quote }: TickerCardProps) {
           <span className="font-medium">
             {isPositive ? '+' : ''}
             {quote.change.toFixed(2)} ({isPositive ? '+' : ''}
-            {quote.changePercent.toFixed(2)}%)
+            {quote.changePct.toFixed(2)}%)
           </span>
         </div>
       </div>
 
       {quote.volume && (
-        <div className="mt-3 text-xs text-gray-500">
+        <div className="mt-3 text-xs" style={{ color: COLORS.subt }}>
           Vol: {formatVolume(quote.volume)}
         </div>
       )}
 
-      <div className="mt-2 text-xs text-gray-400">
-        {quote.assetType === 'crypto' ? 'Live' : 'Delayed 15min'}
+      <div className="mt-2 text-xs" style={{ color: COLORS.subt }}>
+        {quote.assetClass === 'crypto' ? 'Live' : 'Delayed 15min'} • {new Date(quote.time).toLocaleTimeString()}
       </div>
     </div>
   );

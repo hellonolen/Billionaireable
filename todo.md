@@ -1117,7 +1117,17 @@
 - [ ] Deploy fix to production
 
 ## Phase 33: Fix All Detail Pages (URGENT - Meeting Soon)
-- [ ] Fix News & Market Intelligence page layout (currently pitiful)
-- [ ] Add data to all 15 detail pages
-- [ ] Ensure all detail pages match homepage quality
-- [ ] Deploy fixes to production
+- [x] Fix News & Market Intelligence page layout (currently pitiful)
+- [x] Add data to all 15 detail pages (all pages already have data)
+- [x] Ensure all detail pages match homepage quality
+- [x] Deploy fixes to production
+
+## Phase 34: Rebuild Markets Page (Free-Only Data, First-Paint, CORS Fix)
+- [x] Create server API routes (/api/quotes, /api/fx) to bypass CORS
+- [x] Implement rate limiters for Yahoo (≤2 rps) and FX (≤10/min)
+- [x] Create data router with first-paint loading + polling + crypto WebSocket
+- [x] Build TickerCard and ScreenerGrid components
+- [x] Add tabs for All/Stocks/Indexes/Crypto/Forex/Futures
+- [ ] Ensure all tabs show data immediately on first load
+- [ ] Test live crypto WebSocket updates
+- [ ] Deploy to production

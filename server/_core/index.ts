@@ -8,6 +8,8 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { startMarketDataRefresh } from "../jobs/marketDataFetcher";
+import quotesRouter from "../routes/quotes";
+import fxRouter from "../routes/fx";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -45,6 +47,9 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  // Market data API routes
+  app.use(quotesRouter);
+  app.use(fxRouter);
   // tRPC API
   app.use(
     "/api/trpc",
