@@ -5,10 +5,9 @@ import { COLORS } from "@/lib/constants";
 interface EditableSectionProps {
   children: ReactNode;
   onEdit: () => void;
-  hasRealData?: boolean;
 }
 
-export function EditableSection({ children, onEdit, hasRealData = false }: EditableSectionProps) {
+export function EditableSection({ children, onEdit }: EditableSectionProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -33,11 +32,7 @@ export function EditableSection({ children, onEdit, hasRealData = false }: Edita
         </button>
       )}
       
-      {!hasRealData && (
-        <div className="absolute bottom-2 left-2 text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded">
-          Sample data
-        </div>
-      )}
+
     </div>
   );
 }

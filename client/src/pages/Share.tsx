@@ -154,8 +154,8 @@ export default function Share() {
           <p className="text-sm" style={{ color: COLORS.subt }}>Generate secure links to share specific data with trusted individuals</p>
         </div>
 
-        {/* Share Templates Grid - 2 columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Share Templates Grid - 3 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SHARE_TEMPLATES.map(template => {
             const Icon = template.icon;
             const hasLink = generatedLinks[template.id];

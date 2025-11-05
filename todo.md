@@ -922,79 +922,176 @@
 - [ ] Push to GitHub
 - [ ] Deploy with custom domain
 
-## Phase 18: AI Life Companion (PRIORITY)
-- [x] Build conversational AI agent backend with memory system
-- [x] Create chat interface accessible from all pages
-- [x] Integrate AI with all dashboard data (reads user's full context)
-- [x] Implement conversation memory (RAG system)
-- [x] Add proactive insights (AI monitors data and surfaces recommendations)
-- [x] Build holistic intelligence (connects wealth + health + goals + time)
-- [x] Add voice input support (browser-based speech recognition)
-- [x] Add voice output support (text-to-speech)
-- [x] Create engaging personality (challenging, supportive, friend-like)
-- [x] Implement multi-language support
-- [x] Add cultural intelligence and context awareness
-- [x] Build billionaire principles knowledge base
-- [x] Test conversation quality and engagement
-- [x] Add lightweight CMS for AI companion management
+## Phase 35: Brand Consistency & Design Tokens (HIGH-AUTHORITY EXECUTION)
+- [ ] Create /shared/tokens.ts with design tokens
+- [ ] Remove ALL transparency from global CSS
+- [ ] Normalize typography to match Insights page
+- [ ] Standardize all components (Card, Modal, Dropdown, Tooltip)
+- [ ] Add consistent spacing scale (4-8-12-16-24-32)
+- [ ] Apply Insights look to all non-dashboard pages
 
-## Phase 19: Proactive AI Monitoring & Relationship Intelligence
-- [x] Add email integration (Gmail, Outlook) - structure ready, OAuth setup pending
-- [x] Monitor email activity and track key relationships
-- [x] Detect communication patterns (who, frequency, tone)
-- [x] Proactive suggestions after conversations ("I heard your call with X, want my insight?")
-- [x] Relationship health tracking (flag when key connections go cold)
-- [x] Minimum contact frequency alerts (suggest reaching out to important people)
-- [x] Behavioral pattern detection (changes in habits, communication style)
-- [x] Calendar integration to track meetings and time allocation - structure ready, OAuth setup pending
-- [x] Proactive check-ins based on observed behavior
-- [x] Context-aware insights ("I noticed you emailed X 3 times today - what's happening?")
-- [x] Database schema for emails, calendar, relationships, behavioral patterns
-- [x] Proactive monitoring service with relationship intelligence
-- [x] Manual logging options (for when OAuth isn't set up yet)
+## Phase 36: Calendar Integration
+- [ ] Create calendar page with month/week/day views
+- [ ] Implement Google Calendar OAuth integration
+- [ ] Implement Microsoft 365 Calendar OAuth integration
+- [ ] Add unified calendar view (Work + Personal)
+- [ ] Add calendar filters and keyword search
+- [ ] Add ICS file import fallback
+- [ ] Store OAuth tokens securely
+- [ ] Ensure solid white UI for all calendar components
 
-## Phase 21: Recreate Design Concept Pages (Lost in Rollback)
-- [x] Recreate Design 1 page - AI-First Modern Dashboard
-- [x] Recreate Design 2 page - Luxury Minimalist Dashboard
-- [x] Recreate Design 3 page - Data-Rich Executive Dashboard
-- [x] Add Design menu to header (ALWAYS VISIBLE, not hidden)
-- [x] Add routes to App.tsx
-- [x] Fix AI chatbot visibility (moved to bottom-right, larger, gradient background, white border)
-- [x] Test all 3 designs are accessible
+## Phase 37: Voice Enablement
+- [ ] Implement STT (Speech-to-Text) with Azure Speech SDK
+- [ ] Add Web Speech API fallback for STT
+- [ ] Implement TTS (Text-to-Speech) with Azure Neural/ElevenLabs
+- [ ] Add Web Speech Synthesis API fallback for TTS
+- [ ] Create persistent Voice Bar component
+- [ ] Add VU meter and status indicator
+- [ ] Implement push-to-talk (hold Space)
+- [ ] Add hands-free toggle
+- [ ] Create voice settings page
 
-## Phase 22: Remove Design Concept Pages (User Rejected)
-- [x] Delete Design1.tsx, Design2.tsx, Design3.tsx
-- [x] Remove Design menu from DashboardHeader
-- [x] Remove design routes from App.tsx
-- [x] Remove design imports from App.tsx
-- [x] Verify app works without design pages
+## Phase 38: Listening & Insight Engine
+- [ ] Create insight engine to capture user data
+- [ ] Implement voice input capture
+- [ ] Implement calendar event capture
+- [ ] Build insight summarization with LLM
+- [ ] Create member_insights database table
+- [ ] Build insights overview page
+- [ ] Add Life Overview insights
+- [ ] Add Business Overview insights
+- [ ] Generate weekly briefing card
+- [ ] Add contextual recommendations
 
-## Phase 23: Complete AI Companion Integration (URGENT)
-- [x] Make AI companion chat button visible and prominent on dashboard
-- [x] Add proactive insights card to homepage (shows AI-generated insights)
-- [ ] Test voice input functionality
-- [ ] Test web research integration
-- [ ] Set up email OAuth flow (Gmail) - infrastructure ready, OAuth pending
-- [ ] Set up calendar OAuth flow (Google Calendar) - infrastructure ready, OAuth pending
-- [ ] Test relationship monitoring
-- [ ] Test behavioral pattern detection
-- [ ] Verify all AI features work end-to-end
+## Phase 39: QA & Proof Delivery
+- [ ] Verify zero transparency anywhere
+- [ ] Check accessibility (contrast 4.5:1, keyboard nav)
+- [ ] Run Lighthouse accessibility score (≥90)
+- [ ] Typecheck and lint pass
+- [ ] Capture screenshots of all features
+- [ ] Create WORK LOG with evidence
+- [ ] Deliver final build confirmation
 
-## Phase 24: Fix AI Chat Interface (URGENT)
-- [x] Remove transparency from chat window (solid white/dark background)
-- [x] Change from floating window to slide-in panel or full modal
-- [x] Fix overlap with dashboard content
-- [x] Make chat window properly readable and usable
-- [ ] Test on actual dashboard to verify no overlap
+## Phase 40: Remove All Sample Data Badges (USER REQUEST - CRITICAL)
+- [ ] Find all "Sample data" badges in project
+- [ ] Remove from Dashboard page
+- [ ] Remove from Health Goals page
+- [ ] Remove from Reports page
+- [ ] Remove from all other pages
+- [ ] Remove from database schema if present
+- [ ] Never add sample data labels again
 
-## Phase 25: Rebuild AI Agent (NO CHATBOT - Embedded Intelligence)
-- [x] Remove AI chatbot completely (no floating button, no chat window)
-- [x] Add always-listening voice icon in header (LEFT side, near logo)
-- [x] Create Transcripts page (/transcripts) to show conversation history
-- [x] Add Transcripts link to header navigation
-- [ ] Build embedded AI insights that appear DIRECTLY in dashboard sections
-- [ ] Add proactive alerts that show up in context (not in separate chat)
-- [ ] Integrate AI analysis into each dashboard card
-- [ ] Add contextual AI suggestions within each section
-- [ ] Make AI invisible but everywhere (analyzing, suggesting, alerting)
-- [ ] Test embedded intelligence in dashboard
+## Phase 41: Fix Card Grid Layouts (USER REQUEST - CRITICAL)
+- [ ] Fix health page cards - make square grid not horizontal
+- [ ] Fix reports page cards - make square grid not horizontal
+- [ ] Adjust breakpoints for better mobile/tablet view
+- [ ] Use 2-3 cards across instead of 1 wide card
+- [ ] Test on normal screen sizes (not just wide screens)
+
+## Phase 42: Implement FullCalendar with Billionaireable Theme
+- [ ] Install FullCalendar packages
+- [ ] Create FullCalendar component
+- [ ] Style with Billionaireable white theme
+- [ ] Generate visual mockup of styled calendar
+- [ ] Add month/week/day views
+- [ ] Ensure solid white backgrounds
+
+## Phase 43: Add Calendar to Main Navigation
+- [ ] Add calendar link to DashboardLayout navigation
+- [ ] Ensure calendar appears in all page menus
+- [ ] Test navigation consistency
+
+## Phase 44: Fix Notification Page Layout
+- [ ] Change notifications from horizontal to square grid
+- [ ] Use 2-3 notification cards across
+- [ ] Remove stretched horizontal cards
+- [ ] Apply consistent card sizing
+
+## Phase 45: Ensure Consistent Navigation
+- [ ] Verify all pages use DashboardLayout
+- [ ] Ensure same menu appears on all pages
+- [ ] Test navigation on every page
+
+## Phase 20: Card Layout Improvements
+- [x] Fix Share page card grid to display 3 cards per row (not full-width stretched)
+- [x] Fix Insights page card grid to display 3 cards per row (not full-width stretched)
+- [x] Ensure consistent card sizing across all pages
+
+## Phase 21: World-Class Agentic Platform Implementation
+- [x] Add plus icon (bottom-right) to all 15 dashboard cards
+- [x] Create Markets page with real-time stock, crypto, forex data
+- [x] Add Markets to navigation menu
+- [ ] Implement Plaid integration for financial account connections
+- [ ] Add Apple Health integration for health metrics
+- [ ] Create manual data entry modals for all cards
+- [ ] Build database schema for user data storage
+- [ ] Implement Billionaireable AI agent (unified monitoring system)
+- [ ] Add anomaly detection across all cards
+- [ ] Build predictive analytics engine
+- [ ] Create proactive alert system
+- [ ] Add daily briefing generation
+- [ ] Implement one-click action execution
+- [ ] Add automated report generation
+- [ ] Create Contacts page with relationship tracking
+- [ ] Add scenario modeling calculator
+- [ ] Implement goal tracking with automation
+- [ ] Add document management system
+- [ ] Create communication hub (email/SMS from dashboard)
+- [ ] Add calendar integration for time tracking
+
+## Phase 22: Market-Ready Platform Implementation
+- [x] Create database schema for all dashboard metrics (contacts, agent_logs, documents tables)
+- [x] Build modal data entry forms for each card type
+- [x] Wire up plus icon to open data entry modals
+- [x] Create Contacts page with CRUD operations
+- [x] Build Billionaireable AI agent backend service
+- [x] Implement anomaly detection across all metrics
+- [x] Add predictive forecasting for net worth and goals
+- [x] Create alerts system for important changes
+- [ ] Build action execution layer (email, SMS, calendar)
+- [ ] Add Plaid integration for bank/brokerage connections
+- [ ] Add Apple Health integration for biomarkers
+- [x] Create Documents page with S3 storage
+- [ ] Implement scenario modeling for financial decisions
+- [x] Add daily briefing generation
+- [x] Build relationship intelligence tracking
+
+## Phase 23: Unified System Page
+- [x] Create System page merging Contacts and Documents with Insights-style design
+- [x] Update navigation to replace Contacts and Documents with System
+- [x] Ensure consistent card-based layout matching Insights page
+
+## Phase 30: Professional Market Screener (Free APIs Only)
+- [ ] Build rate limiter with token bucket algorithm
+- [ ] Create data provider infrastructure and router
+- [ ] Implement Coinbase WebSocket provider for live crypto
+- [ ] Implement Binance WebSocket provider for live crypto
+- [ ] Implement Yahoo Finance provider for stocks/indexes/futures (delayed, 15s polling)
+- [ ] Implement exchangerate.host provider for forex (30s polling)
+- [ ] Build ScreenerHeader with search and asset filters
+- [ ] Build TickerCard component with sparklines
+- [ ] Build virtualized ScreenerGrid with infinite scroll
+- [ ] Add theme toggle (white default, dark mode option)
+- [ ] Add URL state management for search/filters/theme
+- [ ] Test rate limits and verify no API overages
+
+## Phase 31: Railway Deployment Admin Dashboard
+- [x] Create deployments table in database
+- [ ] Build Railway API integration
+- [x] Create Admin page showing deployment history
+- [x] Add deployment status indicators
+- [ ] Add webhook endpoint for Railway notifications
+- [x] Display git push history
+- [x] Show deployment metrics and logs
+
+
+## Phase 30: LAUNCH REQUIREMENTS (Meeting in 2 hours - PRIORITY)
+- [x] Public demo mode - dashboard visible without login (sample data only)
+- [x] Checkout page with Whop.com payment embed ($97)
+- [ ] Paywall triggers on all "Update Data" buttons
+- [ ] Post-payment unlock flow (redirect back after payment)
+- [x] User payment status tracking in database
+- [x] Remove authentication requirement for viewing dashboard
+- [x] Add "Sign Up to Customize" CTA on demo dashboard
+- [ ] Test complete user journey: view demo → checkout → payment → unlock
+- [x] Deploy to billionaireable.com via Railway

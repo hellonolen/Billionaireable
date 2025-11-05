@@ -145,4 +145,17 @@ export const adminRouter = router({
     if (result.length === 0) return null;
     return JSON.parse(result[0].data);
   }),
+
+  getDeployments: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) {
+      return [];
+    }
+
+    const result: any = await db.execute(
+      'SELECT * FROM deployments ORDER BY started_at DESC LIMIT 20'
+    );
+
+    return (result[0] || []) as any[];
+  }),
 });

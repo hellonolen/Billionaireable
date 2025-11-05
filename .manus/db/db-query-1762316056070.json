@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `health_biomarkers` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `biomarkerType` varchar(100) NOT NULL,\n  `value` varchar(50) NOT NULL,\n  `unit` varchar(20) NOT NULL,\n  `optimalMin` varchar(50),\n  `optimalMax` varchar(50),\n  `status` varchar(20) NOT NULL,\n  `trend` varchar(20),\n  `measuredAt` timestamp NOT NULL,\n  `source` varchar(100),\n  `notes` text,\n  `createdAt` timestamp NOT NULL DEFAULT (now()),\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `health_biomarkers_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 21QwgYBsFYsrms6.1a37c9db3b61 --database SMDTBjD87an88y9nwbRwxg --execute CREATE TABLE IF NOT EXISTS `health_biomarkers` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `biomarkerType` varchar(100) NOT NULL,\n  `value` varchar(50) NOT NULL,\n  `unit` varchar(20) NOT NULL,\n  `optimalMin` varchar(50),\n  `optimalMax` varchar(50),\n  `status` varchar(20) NOT NULL,\n  `trend` varchar(20),\n  `measuredAt` timestamp NOT NULL,\n  `source` varchar(100),\n  `notes` text,\n  `createdAt` timestamp NOT NULL DEFAULT (now()),\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `health_biomarkers_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 633
+}

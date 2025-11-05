@@ -4,12 +4,12 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { 
   Users, DollarSign, TrendingUp, Activity, 
   Settings, FileText, CreditCard, AlertCircle,
-  UserCheck, UserX, Crown, Shield
+  UserCheck, UserX, Crown, Shield, Rocket
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
 
-type AdminTab = "overview" | "users" | "settings" | "analytics" | "billing" | "content" | "system";
+type AdminTab = "overview" | "users" | "settings" | "analytics" | "billing" | "content" | "system" | "deployments";
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState<AdminTab>("overview");
@@ -19,10 +19,15 @@ export default function Admin() {
   const { data: stats } = trpc.admin.getStats.useQuery();
   const { data: users } = trpc.admin.getAllUsers.useQuery();
   const { data: recentActivity } = trpc.admin.getRecentActivity.useQuery();
+  const { data: deployments, isLoading: deploymentsLoading } = trpc.admin.getDeployments.useQuery(undefined, {
+    refetchInterval: 10000, // Refresh every 10 seconds
+    enabled: activeTab === 'deployments',
+  });
 
   const tabs = [
     { id: "overview" as AdminTab, label: "Overview", icon: Activity },
     { id: "users" as AdminTab, label: "Users", icon: Users },
+    { id: "deployments" as AdminTab, label: "Deployments", icon: Rocket },
     { id: "billing" as AdminTab, label: "Billing", icon: CreditCard },
     { id: "analytics" as AdminTab, label: "Analytics", icon: TrendingUp },
     { id: "content" as AdminTab, label: "Content", icon: FileText },
@@ -276,29 +281,111 @@ export default function Admin() {
           </div>
         )}
 
-        {/* Content Tab */}
-        {activeTab === "content" && (
+        {/* Deployments Tab */}
+        {activeTab === "deployments" && (
           <div className="space-y-4">
-            <button
-              onClick={() => setLocation("/admin/ai-companion")}
-              className="w-full bg-white border rounded-xl p-6 text-left hover:shadow-md transition-shadow"
-              style={{ borderColor: COLORS.border }}
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-semibold mb-1" style={{ color: COLORS.text }}>AI Companion Management</div>
-                  <div className="text-sm" style={{ color: COLORS.subt }}>
-                    Manage knowledge base, insights, and conversations
-                  </div>
-                </div>
-                <FileText className="h-6 w-6" style={{ color: COLORS.primary }} />
+            {deploymentsLoading ? (
+              <div
+                className="p-8 rounded-lg text-center"
+                style={{ background: '#fff', border: `1px solid ${COLORS.border}` }}
+              >
+                <p style={{ color: COLORS.subt }}>Loading deployments...</p>
               </div>
-            </button>
+            ) : !deployments || deployments.length === 0 ? (
+              <div
+                className="p-8 rounded-lg text-center"
+                style={{ background: '#fff', border: `1px solid ${COLORS.border}` }}
+              >
+                <p style={{ color: COLORS.subt }}>No deployments found</p>
+              </div>
+            ) : (
+              deployments.map((deployment: any) => (
+                <div
+                  key={deployment.id}
+                  className="p-6 rounded-lg"
+                  style={{ background: '#fff', border: `1px solid ${COLORS.border}` }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span
+                          className="px-3 py-1 rounded-full text-xs font-medium"
+                          style={{
+                            background: `${deployment.status === 'deployed' ? '#10b981' : deployment.status === 'building' ? '#3b82f6' : deployment.status === 'failed' ? '#ef4444' : '#6b7280'}15`,
+                            color: deployment.status === 'deployed' ? '#10b981' : deployment.status === 'building' ? '#3b82f6' : deployment.status === 'failed' ? '#ef4444' : '#6b7280',
+                          }}
+                        >
+                          {deployment.status.charAt(0).toUpperCase() + deployment.status.slice(1)}
+                        </span>
+                        <span
+                          className="text-xs font-mono"
+                          style={{ color: COLORS.subt }}
+                        >
+                          {deployment.commit_hash.substring(0, 7)}
+                        </span>
+                      </div>
+                      <p className="font-medium mb-1" style={{ color: COLORS.text }}>
+                        {deployment.commit_message || 'No commit message'}
+                      </p>
+                      <p className="text-sm" style={{ color: COLORS.subt }}>
+                        {deployment.branch} • Started{' '}
+                        {new Date(deployment.started_at).toLocaleString()}
+                      </p>
+                    </div>
+
+                    {deployment.completed_at && (
+                      <div className="text-right">
+                        <p className="text-xs" style={{ color: COLORS.subt }}>
+                          Completed
+                        </p>
+                        <p className="text-sm font-medium" style={{ color: COLORS.text }}>
+                          {new Date(deployment.completed_at).toLocaleString()}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {deployment.error_message && (
+                    <div
+                      className="mt-4 p-4 rounded text-sm font-mono"
+                      style={{
+                        background: '#fef2f2',
+                        color: '#991b1b',
+                        border: '1px solid #fecaca',
+                      }}
+                    >
+                      {deployment.error_message}
+                    </div>
+                  )}
+
+                  {deployment.logs && (
+                    <details className="mt-4">
+                      <summary
+                        className="cursor-pointer text-sm font-medium"
+                        style={{ color: COLORS.primary }}
+                      >
+                        View Logs
+                      </summary>
+                      <pre
+                        className="mt-2 p-4 rounded text-xs overflow-x-auto"
+                        style={{
+                          background: '#f9fafb',
+                          color: '#374151',
+                          border: `1px solid ${COLORS.border}`,
+                        }}
+                      >
+                        {deployment.logs}
+                      </pre>
+                    </details>
+                  )}
+                </div>
+              ))
+            )}
           </div>
         )}
 
         {/* Other tabs - placeholder for now */}
-        {["billing", "analytics", "system"].includes(activeTab) && (
+        {["billing", "analytics", "content", "system"].includes(activeTab) && (
           <div className="bg-white border rounded-xl p-12 text-center" style={{ borderColor: COLORS.border }}>
             <div className="text-lg font-semibold mb-2" style={{ color: COLORS.text }}>
               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Dashboard

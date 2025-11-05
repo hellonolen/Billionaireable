@@ -4,7 +4,6 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { AICompanion } from "./components/AICompanion";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import Integrations from "./pages/Integrations";
@@ -22,23 +21,28 @@ import Billing from "./pages/Billing";
 import TeamManagement from "./pages/TeamManagement";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
-import AdminAICompanion from "./pages/AdminAICompanion";
 import AdminSettings from "./pages/AdminSettings";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Disclosures from "./pages/Disclosures";
 import Preferences from "./pages/Preferences";
-import Transcripts from "./pages/Transcripts";
+import Calendar from "./pages/Calendar";
+import Markets from "./pages/Markets";
+import System from "./pages/System";
+import Checkout from "./pages/Checkout";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Dashboard} />
-      <Route path={"/transcripts"} component={Transcripts} />
       <Route path={"/settings"} component={Settings} />
       <Route path={"/integrations"} component={Integrations} />
 
-      <Route path={"/health-goals"} component={HealthGoals} />
+      <Route path="/health-goals" component={HealthGoals} />
+      <Route path="/calendar" component={Calendar} />
+      <Route path="/markets" component={Markets} />
+      <Route path={"/system"} component={System} />
+      <Route path={"/checkout"} component={Checkout} />
       <Route path={"/share"} component={Share} />
       <Route path={"/data-import"} component={DataImport} />
       <Route path={"/customize-layout"} component={CustomizeLayout} />
@@ -51,7 +55,6 @@ function Router() {
       <Route path={"/team"} component={TeamManagement} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/admin"} component={Admin} />
-      <Route path={"/admin/ai-companion"} component={AdminAICompanion} />
       <Route path={"/admin/settings"} component={AdminSettings} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
@@ -66,11 +69,10 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light" switchable>
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
           <Router />
-          <AICompanion />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

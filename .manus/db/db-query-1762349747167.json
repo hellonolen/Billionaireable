@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS deployments (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  commit_hash VARCHAR(64) NOT NULL,\n  commit_message TEXT,\n  branch VARCHAR(128) DEFAULT 'main',\n  status ENUM('pending', 'building', 'deployed', 'failed') DEFAULT 'pending',\n  railway_deployment_id VARCHAR(128),\n  started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  completed_at TIMESTAMP NULL,\n  logs TEXT,\n  error_message TEXT,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  INDEX idx_status (status),\n  INDEX idx_started_at (started_at)\n)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 21QwgYBsFYsrms6.1a37c9db3b61 --database SMDTBjD87an88y9nwbRwxg --execute CREATE TABLE IF NOT EXISTS deployments (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  commit_hash VARCHAR(64) NOT NULL,\n  commit_message TEXT,\n  branch VARCHAR(128) DEFAULT 'main',\n  status ENUM('pending', 'building', 'deployed', 'failed') DEFAULT 'pending',\n  railway_deployment_id VARCHAR(128),\n  started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  completed_at TIMESTAMP NULL,\n  logs TEXT,\n  error_message TEXT,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  INDEX idx_status (status),\n  INDEX idx_started_at (started_at)\n)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 250
+}

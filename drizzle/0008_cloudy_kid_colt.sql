@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `hasPaid` enum('yes','no') DEFAULT 'no' NOT NULL;
