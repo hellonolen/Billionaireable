@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import { startMarketDataRefresh } from "../jobs/marketDataFetcher";
 import quotesRouter from "../routes/quotes";
 import fxRouter from "../routes/fx";
+import finvizRouter from "../routes/finviz";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -50,6 +51,7 @@ async function startServer() {
   // Market data API routes
   app.use(quotesRouter);
   app.use(fxRouter);
+  app.use(finvizRouter);
   // tRPC API
   app.use(
     "/api/trpc",

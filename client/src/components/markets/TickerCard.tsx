@@ -24,7 +24,7 @@ export function TickerCard({ quote }: TickerCardProps) {
   };
 
   return (
-    <div className="border rounded-lg p-4 hover:shadow-md transition-shadow" style={{ borderColor: COLORS.border, background: COLORS.panel }}>
+    <div className="border rounded-lg p-4 hover:shadow-md transition-shadow bg-white" style={{ borderColor: COLORS.border }}>
       <div className="flex items-start justify-between mb-2">
         <div>
           <div className="font-semibold" style={{ color: COLORS.text }}>{quote.symbol}</div>
