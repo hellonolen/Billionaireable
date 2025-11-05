@@ -3,15 +3,12 @@ import { DashboardHeader } from '@/components/DashboardHeader';
 import { ScreenerGrid } from '@/components/markets/ScreenerGrid';
 import { COLORS } from '@/lib/constants';
 
-type TabType = 'all' | 'stocks' | 'indexes' | 'crypto' | 'forex' | 'futures';
+type TabType = 'all' | 'crypto' | 'forex';
 
 const TABS: { value: TabType; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'stocks', label: 'Stocks' },
-  { value: 'indexes', label: 'Indexes' },
   { value: 'crypto', label: 'Crypto' },
   { value: 'forex', label: 'Forex' },
-  { value: 'futures', label: 'Futures' },
 ];
 
 export default function Markets() {
@@ -26,11 +23,8 @@ export default function Markets() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-bold" style={{ color: COLORS.text }}>Markets</h1>
-            <p className="text-sm mt-1" style={{ color: COLORS.subt }}>Real-time market data and indexes</p>
+            <p className="text-sm mt-1" style={{ color: COLORS.subt }}>Real-time market data • Crypto live via Coinbase • Forex updates every 30s</p>
           </div>
-          <span className="text-xs px-3 py-1 rounded border" style={{ borderColor: COLORS.border, background: COLORS.panel, color: COLORS.subt }}>
-            Free data (delayed for equities/futures)
-          </span>
         </div>
 
         {/* Tabs */}

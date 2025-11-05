@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import { loadFirst, startPolling, Quote } from '@/lib/market-data/router';
+import { loadInitial, startLive, Quote } from '@/lib/market-data/router';
 import { TickerCard } from './TickerCard';
 import { COLORS } from '@/lib/constants';
 
 interface ScreenerGridProps {
-  tab: 'all' | 'stocks' | 'indexes' | 'crypto' | 'forex' | 'futures';
+  tab: 'all' | 'crypto' | 'forex';
 }
 
 export function ScreenerGrid({ tab }: ScreenerGridProps) {
@@ -17,17 +17,17 @@ export function ScreenerGrid({ tab }: ScreenerGridProps) {
     setLoading(true);
 
     // Load first batch immediately
-    loadFirst(tab).then((initial) => {
+    loadInitial(tab).then((initial) => {
       if (!mounted) return;
       setData(Object.fromEntries(initial.map(q => [q.symbol, q])));
       setLoading(false);
     });
 
     // Start polling for updates
-    const stop = startPolling(tab, (batch) => {
+    const stop = startLive(tab, (batch: Quote[]) => {
       setData(d => {
         const newData = { ...d };
-        batch.forEach(q => {
+        batch.forEach((q: Quote) => {
           newData[q.symbol] = { ...(newData[q.symbol] || {} as any), ...q };
         });
         return newData;

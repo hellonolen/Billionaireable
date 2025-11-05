@@ -52,11 +52,7 @@ export function TickerCard({ quote }: TickerCardProps) {
         </div>
       </div>
 
-      {quote.volume && (
-        <div className="mt-3 text-xs" style={{ color: COLORS.subt }}>
-          Vol: {formatVolume(quote.volume)}
-        </div>
-      )}
+
 
       <div className="mt-2 text-xs" style={{ color: COLORS.subt }}>
         {quote.assetClass === 'crypto' ? 'Live' : 'Delayed 15min'} • {new Date(quote.time).toLocaleTimeString()}
