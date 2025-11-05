@@ -28,19 +28,23 @@ export default function Markets() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        <div className="flex gap-8 mb-6 border-b" style={{ borderColor: COLORS.border }}>
           {TABS.map((tab) => (
             <button
               key={tab.value}
               onClick={() => setActiveTab(tab.value)}
-              className="px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all"
+              className="px-2 py-3 text-sm font-medium whitespace-nowrap relative transition-colors"
               style={{
-                background: 'transparent',
                 color: activeTab === tab.value ? COLORS.primary : COLORS.text,
-                border: `2px solid ${activeTab === tab.value ? COLORS.primary : COLORS.border}`,
               }}
             >
               {tab.label}
+              {activeTab === tab.value && (
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-0.5"
+                  style={{ background: COLORS.primary }}
+                />
+              )}
             </button>
           ))}
         </div>
