@@ -1,17 +1,22 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { marketsV2Router } from "./routers/marketsv2";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscriptionsRouter } from "./routers/subscriptions";
 import { adminRouter } from "./routers/admin";
 import { teamsRouter } from "./routers/teams";
-import { aiCompanionRouter } from "./routers/ai-companion-router";
+import { marketsRouter } from "./routers/markets";
+import { contactsRouter } from "./routers/contacts";
+import { agentRouter } from "./routers/agent";
+import { documentsRouter } from "./routers/documents";
 import { getDashboardSection, getAllDashboardSections, upsertDashboardSection, getUserHealthBiomarkers, createHealthBiomarker, updateHealthBiomarker, getUserHealthGoals, createHealthGoal, updateHealthGoal, createSharedDashboard, getUserSharedDashboards, getSharedDashboard, getUserNotifications, createNotification, markNotificationRead, addMetricData, getMetricsByUser, getLatestMetric, getUserNotificationRules, createNotificationRule, updateNotificationRule, deleteNotificationRule, getUserIntegrations, getIntegration, upsertIntegration, getUserAchievements, unlockAchievement, getUserStreaks, updateStreak } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
+  marketsV2: marketsV2Router,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -396,7 +401,10 @@ export const appRouter = router({
   subscriptions: subscriptionsRouter,
   admin: adminRouter,
   teams: teamsRouter,
-  aiCompanion: aiCompanionRouter,
+  markets: marketsRouter,
+  contacts: contactsRouter,
+  agent: agentRouter,
+  documents: documentsRouter,
 });
 
 export type AppRouter = typeof appRouter;

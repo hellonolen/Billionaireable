@@ -178,25 +178,27 @@ export default function Insights() {
         </div>
 
         {/* Category Filter */}
-        <div className="flex gap-2 mb-6 overflow-x-auto">
+        <div className="flex gap-6 mb-6 overflow-x-auto border-b" style={{ borderColor: COLORS.border }}>
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className="px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors"
-              style={{
-                background: selectedCategory === cat ? COLORS.primary : "white",
-                color: selectedCategory === cat ? "white" : COLORS.text,
-                border: `1px solid ${selectedCategory === cat ? COLORS.primary : COLORS.border}`,
-              }}
+              className="relative px-2 py-2 text-sm font-medium whitespace-nowrap transition-colors group"
+              style={{ color: COLORS.text }}
             >
               {cat}
+              <span 
+                className={`absolute bottom-0 left-0 w-full h-0.5 transition-all ${
+                  selectedCategory === cat ? 'bg-blue-500' : 'bg-blue-500 scale-x-0 group-hover:scale-x-100'
+                }`} 
+                style={{ transformOrigin: 'left' }} 
+              />
             </button>
           ))}
         </div>
 
         {/* AI Insights Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {filteredInsights.map((insight, index) => {
             return (
               <div

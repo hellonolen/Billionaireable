@@ -97,7 +97,7 @@ export default function Reports() {
         </div>
 
         {/* Report Templates Grid - matching Insights page style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {REPORT_TEMPLATES.map(template => {
             const Icon = template.icon;
             return (
