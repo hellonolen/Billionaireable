@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DashboardHeader } from '@/components/DashboardHeader';
 import { ScreenerGrid } from '@/components/markets/ScreenerGrid';
 import { COLORS } from '@/lib/constants';
 
-type TabType = 'all' | 'crypto' | 'forex';
+type TabType = 'all' | 'indexes' | 'energy' | 'metals' | 'softs' | 'grains' | 'meats' | 'bonds' | 'forex' | 'crypto';
 
 const TABS: { value: TabType; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'crypto', label: 'Crypto' },
+  { value: 'indexes', label: 'Indexes' },
+  { value: 'energy', label: 'Energy' },
+  { value: 'metals', label: 'Metals' },
+  { value: 'softs', label: 'Softs' },
+  { value: 'grains', label: 'Grains' },
+  { value: 'meats', label: 'Meats' },
+  { value: 'bonds', label: 'Bonds' },
   { value: 'forex', label: 'Forex' },
+  { value: 'crypto', label: 'Crypto' },
 ];
 
 export default function Markets() {
@@ -23,12 +30,12 @@ export default function Markets() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-bold" style={{ color: COLORS.text }}>Markets</h1>
-            <p className="text-sm mt-1" style={{ color: COLORS.subt }}>Real-time market data • Crypto live via Coinbase • Forex updates every 30s</p>
+            <p className="text-sm mt-1" style={{ color: COLORS.subt }}>Real-time market data from Finviz • Updates every 60s</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-8 mb-6 border-b" style={{ borderColor: COLORS.border }}>
+        <div className="flex gap-8 mb-6 border-b overflow-x-auto" style={{ borderColor: COLORS.border }}>
           {TABS.map((tab) => (
             <button
               key={tab.value}

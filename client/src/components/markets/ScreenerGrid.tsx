@@ -5,7 +5,7 @@ import { TickerCard } from './TickerCard';
 import { COLORS } from '@/lib/constants';
 
 interface ScreenerGridProps {
-  tab: 'all' | 'crypto' | 'forex';
+  tab: string;
 }
 
 export function ScreenerGrid({ tab }: ScreenerGridProps) {

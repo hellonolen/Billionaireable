@@ -1,5 +1,4 @@
 import { Router } from "express";
-import * as cheerio from "cheerio";
 
 const router = Router();
 
@@ -26,52 +25,47 @@ async function scrapeFinviz(): Promise<FinvizQuote[]> {
     if (!response.ok) return [];
     
     const html = await response.text();
-    const $ = cheerio.load(html);
+    
+    // Extract the tiles JSON object from the JavaScript
+    const tilesMatch = html.match(/var tiles = (\{[\s\S]+?\});/);
+    if (!tilesMatch) return [];
+    
+    const tilesData = JSON.parse(tilesMatch[1]);
     const quotes: FinvizQuote[] = [];
     const now = Date.now();
 
-    // Parse each futures table row
-    $('table.table-light tr').each((_: any, row: any) => {
-      const $row = $(row);
-      const cells = $row.find('td');
+    // Process each ticker
+    for (const [ticker, data] of Object.entries(tilesData)) {
+      const item = data as any;
       
-      if (cells.length < 6) return;
+      const name = item.label || ticker;
+      const price = item.last || 0;
+      const change = item.change || 0;
+      const prevClose = item.prevClose || price;
+      const changePct = prevClose > 0 ? (change / prevClose) * 100 : 0;
       
-      const nameCell = $(cells[0]).text().trim();
-      const priceText = $(cells[1]).text().trim();
-      const changeText = $(cells[4]).text().trim();
-      const changePctText = $(cells[5]).text().trim();
-      
-      if (!nameCell || !priceText) return;
-      
-      const price = parseFloat(priceText.replace(/,/g, ''));
-      const change = parseFloat(changeText.replace(/,/g, ''));
-      const changePct = parseFloat(changePctText.replace(/%/g, ''));
-      
-      if (isNaN(price)) return;
-      
-      // Determine asset class from name
+      // Determine asset class from ticker or name
       let assetClass = 'futures';
-      if (nameCell.includes('Year') || nameCell.includes('Bond')) assetClass = 'bonds';
-      else if (['Gold', 'Silver', 'Platinum', 'Copper', 'Palladium'].some(m => nameCell.includes(m))) assetClass = 'metals';
-      else if (['Crude', 'Gasoline', 'Heating', 'Natural Gas', 'Ethanol'].some(e => nameCell.includes(e))) assetClass = 'energy';
-      else if (['Cocoa', 'Cotton', 'Orange', 'Coffee', 'Lumber', 'Sugar'].some(s => nameCell.includes(s))) assetClass = 'softs';
-      else if (['Cattle', 'Hogs'].some(m => nameCell.includes(m))) assetClass = 'meats';
-      else if (['Soybean', 'Corn', 'Wheat', 'Rice', 'Oats', 'Canola'].some(g => nameCell.includes(g))) assetClass = 'grains';
-      else if (['DJIA', 'S&P', 'Nasdaq', 'Russell', 'Nikkei', 'Stoxx', 'DAX', 'VIX'].some(i => nameCell.includes(i))) assetClass = 'indexes';
-      else if (['USD', 'EUR', 'JPY', 'GBP', 'CAD', 'CHF', 'AUD', 'NZD'].some(c => nameCell.includes(c))) assetClass = 'forex';
-      else if (nameCell.includes('Bitcoin')) assetClass = 'crypto';
+      if (['ZB', 'ZN', 'ZF', 'ZT'].includes(ticker)) assetClass = 'bonds';
+      else if (['GC', 'SI', 'PL', 'HG', 'PA'].includes(ticker)) assetClass = 'metals';
+      else if (['CL', 'QA', 'RB', 'HO', 'NG', 'ZK'].includes(ticker)) assetClass = 'energy';
+      else if (['CC', 'CT', 'JO', 'KC', 'LB', 'SB'].includes(ticker)) assetClass = 'softs';
+      else if (['LC', 'FC', 'LH'].includes(ticker)) assetClass = 'meats';
+      else if (['ZS', 'ZM', 'ZL', 'ZC', 'ZW', 'ZR', 'ZO', 'RS'].includes(ticker)) assetClass = 'grains';
+      else if (['YM', 'ES', 'NQ', 'RTY', 'NKD', 'FESX', 'FDAX', 'VX'].includes(ticker)) assetClass = 'indexes';
+      else if (['DX', '6E', '6J', '6B', '6C', '6S', '6A', '6N'].includes(ticker)) assetClass = 'forex';
+      else if (name.includes('Bitcoin')) assetClass = 'crypto';
       
       quotes.push({
-        symbol: nameCell.replace(/\s+/g, '_').toUpperCase(),
-        name: nameCell,
+        symbol: ticker,
+        name,
         assetClass,
         price,
-        change: isNaN(change) ? 0 : change,
-        changePct: isNaN(changePct) ? 0 : changePct,
+        change,
+        changePct,
         time: now
       });
-    });
+    }
 
     return quotes;
   } catch (error) {

@@ -1,9 +1,8 @@
-import { CRYPTO, FOREX, DEFAULT_BY_TAB } from './universe';
-
+// Market data router - fetches from Finviz
 export type Quote = {
   symbol: string;
-  name?: string;
-  assetClass: 'crypto' | 'forex';
+  name: string;
+  assetClass: string;
   price: number;
   change: number;
   changePct: number;
@@ -11,83 +10,63 @@ export type Quote = {
 };
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
-const POLL_FX_MS = 30_000;
+const POLL_MS = 60_000; // Poll Finviz every 60 seconds
 
-async function fetchFX(pairs: string[]): Promise<Quote[]> {
-  const r = await fetch('/api/fx', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pairs })
-  });
-  const j = await r.json();
-  return j.quotes ?? [];
+async function fetchFinviz(): Promise<Quote[]> {
+  try {
+    const r = await fetch('/api/finviz');
+    if (!r.ok) return [];
+    const j = await r.json();
+    return j.quotes ?? [];
+  } catch (error) {
+    console.error('[Market Data] Error fetching Finviz:', error);
+    return [];
+  }
 }
 
-export async function loadInitial(tab: 'all' | 'crypto' | 'forex') {
-  const base = DEFAULT_BY_TAB[tab];
-  const fxPairs = base.filter((s: string) => s.length === 6);
-  const [fx] = await Promise.all([
-    fxPairs.length ? fetchFX(fxPairs) : Promise.resolve([])
-  ]);
-  return [...fx];
-}
-
-function startCoinbase(onTick: (q: Quote) => void, symbols: string[]) {
-  let ws: WebSocket | null = null;
-  let backoff = 1000;
+export function filterByTab(quotes: Quote[], tab: string): Quote[] {
+  if (tab === 'all') return quotes;
   
-  const connect = () => {
-    ws = new WebSocket('wss://ws-feed.exchange.coinbase.com');
-    ws.onopen = () => {
-      backoff = 1000;
-      ws!.send(JSON.stringify({
-        type: 'subscribe',
-        channels: [{ name: 'ticker', product_ids: symbols }]
-      }));
-    };
-    ws.onmessage = (e) => {
-      const m = JSON.parse(e.data);
-      if (m.type === 'ticker' && m.product_id && m.price) {
-        onTick({
-          symbol: m.product_id,
-          name: m.product_id,
-          assetClass: 'crypto',
-          price: parseFloat(m.price),
-          change: 0,
-          changePct: 0,
-          time: Date.now()
-        });
-      }
-    };
-    ws.onclose = () => setTimeout(connect, Math.min(10_000, backoff *= 2));
-    ws.onerror = () => ws?.close();
+  // Map tab names to asset classes
+  const assetClassMap: Record<string, string[]> = {
+    indexes: ['indexes'],
+    stocks: ['stock'],
+    crypto: ['crypto'],
+    forex: ['forex'],
+    futures: ['futures'],
+    energy: ['energy'],
+    metals: ['metals'],
+    softs: ['softs'],
+    grains: ['grains'],
+    meats: ['meats'],
+    bonds: ['bonds'],
   };
   
-  connect();
-  return () => ws?.close();
+  const allowedClasses = assetClassMap[tab] || [];
+  return quotes.filter(q => allowedClasses.includes(q.assetClass));
 }
 
-export function startLive(tab: 'all' | 'crypto' | 'forex', onBatch: (q: Quote[]) => void) {
+export async function loadInitial(tab: string) {
+  const all = await fetchFinviz();
+  return filterByTab(all, tab);
+}
+
+export function startLive(tab: string, onBatch: (q: Quote[]) => void) {
   let alive = true;
 
-  const cryptoSyms = (tab === 'crypto' || tab === 'all') ? CRYPTO : [];
-  const stopWS = cryptoSyms.length ? startCoinbase(q => onBatch([q]), cryptoSyms) : () => {};
-
-  const fxPairs = (tab === 'forex' || tab === 'all') ? FOREX : [];
-  const loopFX = async () => {
-    if (!fxPairs.length) return;
+  const loop = async () => {
     while (alive) {
       try {
-        const fx = await fetchFX(fxPairs);
-        onBatch(fx);
+        const all = await fetchFinviz();
+        const filtered = filterByTab(all, tab);
+        onBatch(filtered);
       } catch { }
-      await sleep(POLL_FX_MS);
+      await sleep(POLL_MS);
     }
   };
-  loopFX();
+  loop();
 
   return () => {
     alive = false;
-    stopWS();
   };
 }
