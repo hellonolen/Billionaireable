@@ -4,6 +4,11 @@ const router = Router();
 
 const FINVIZ_FUTURES_URL = 'https://finviz.com/futures.ashx';
 
+// In-memory cache
+let cachedQuotes: FinvizQuote[] = [];
+let lastFetch = 0;
+const CACHE_TTL = 60_000; // Cache for 60 seconds
+
 interface FinvizQuote {
   symbol: string;
   name: string;
@@ -75,8 +80,21 @@ async function scrapeFinviz(): Promise<FinvizQuote[]> {
 }
 
 router.get('/api/finviz', async (req, res) => {
+  const now = Date.now();
+  
+  // Return cached data if fresh
+  if (cachedQuotes.length > 0 && (now - lastFetch) < CACHE_TTL) {
+    return res.json({ quotes: cachedQuotes });
+  }
+  
+  // Fetch fresh data
   const quotes = await scrapeFinviz();
-  res.json({ quotes });
+  if (quotes.length > 0) {
+    cachedQuotes = quotes;
+    lastFetch = now;
+  }
+  
+  res.json({ quotes: cachedQuotes });
 });
 
 export default router;
